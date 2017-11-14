@@ -88,6 +88,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10">
+                                    <Button type="primary">Primary</Button>
                                     <a href="./course_add_step2.html" class="btn btn-success btn-sm pull-right">保 存</a>
                                 </div>                          
                             </div>
@@ -98,8 +99,12 @@
 </template>
 
 <script>
+import { Button, Table } from 'iview'
 export default {
-
+    components:{
+        Button,
+        Table
+    }
 }
 </script>
 

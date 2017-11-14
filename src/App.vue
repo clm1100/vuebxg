@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import 'iview/dist/styles/iview.css'
 import './assets/bootstrap/css/bootstrap.css'
 import './assets/font-awesome/css/font-awesome.css'
 import './assets/index/index.css'

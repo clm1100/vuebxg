@@ -34,32 +34,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="intem in list">
-                                <td>1</td>
-                                <td>赵玉川</td>
-                                <td>布头儿</td>
-                                <td>28</td>
-                                <td>男</td>
-                                <td>15901256171</td>
+                            <tr v-for="( item,index) in list">
+                                <td>{{index+1}}</td>
+                                <td>{{item.tc_name}}</td>
+                                <td>{{item.tc_roster}}</td>
+                                <td>{{item.tc_birthday}}</td>
+                                <td>{{item.tc_gender==1?'女':'男'}}</td>
+                                <td>{{item.tc_join_date}}</td>
                                 <td>
-                                    <a href="#teacherModal" data-toggle="modal" class="btn btn-info btn-xs">查 看</a>
-                                    <a href="./teacher_add.html" class="btn btn-info btn-xs">编 辑</a>
-                                    <a href="javascript::" class="btn btn-warning btn-xs">注 销</a>
+                                    <Button size="small" type="primary" @click="modal1 = true">查看</Button>
+                                    <Button size="small" type="success" @click="modal1 = true">
+                                        <router-link to="/teacher/list/313131" class="acolor">
+                                             编辑
+                                        </router-link>                                     
+                                    </Button>
+                                    <Button size="small" type="warning" @click="modal1 = true">注销</Button>    
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <Modal
+                    v-model="modal1"
+                    title="Common Modal dialog box title"
+                    @on-ok="ok"
+                    @on-cancel="cancel">
+                    <p>Content of dialog</p>
+                    <p>Content of dialog</p>
+                    <p>Content of dialog</p>
+                </Modal>
             </div>
 </template>
 
 <script>
-// import axios from 'axios'
+ import {Button,Modal} from 'iview'
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 import $ from 'jquery'
 export default {
     data(){
         return {
+            modal1: false,
             list:[]
         }
     },
@@ -72,6 +86,12 @@ export default {
             $.post(api).then((data)=>{
                 this.list  = data.result
             })
+        },
+        ok () {
+                // this.$Message.info('Clicked ok');
+        },
+        cancel () {
+            // this.$Message.info('Clicked cancel');
         }
     }
 }
@@ -79,5 +99,5 @@ export default {
 
 
 <style scoped>
-
+.acolor{color: #fff}
 </style>

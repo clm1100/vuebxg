@@ -5,9 +5,10 @@
         <div class="profile">
             <!-- 头像 -->
             <div class="avatar img-circle">
-                <img src="../assets/avatar.jpg">
+                <!-- <img src="../assets/avatar.jpg"> -->
+                  <img :src="tc_avatar" :onerror="defaultImg">
             </div>
-            <h4>布头儿</h4>
+            <h4 v-text="tc_name"></h4>
         </div>
         <!-- 导航菜单 -->
         <div class="navs">
@@ -59,15 +60,22 @@
 </template>
 
 <script>
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      show:false
+      show:false,
+      tc_name:'',
+      tc_avatar:'',
+      defaultImg: 'this.src="' + require('../assets/avatar.jpg') + '"'
     }
   },
   created(){
-
+    console.log(this.$cookie)
+    this.tc_name=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_name,
+    this.tc_avatar=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_avatar||'../assets/avatar.jpg'
+    console.log(this.tc_name)
 },
   mounted(){
       
