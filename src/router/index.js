@@ -58,14 +58,6 @@ const router = new Router({
         {
           path: '/course/list',
           component: TeacherAdd
-        },
-        {
-          path: '/course/category',
-          component: TeacherList
-        },
-        {
-          path: '/course/topic',
-          component: TeacherList
         }
       ]
     }

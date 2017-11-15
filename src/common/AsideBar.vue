@@ -42,16 +42,6 @@
                                  课程列表
                             </router-link>
                         </li>
-                        <li>
-                            <router-link to="/course/category">
-                                 课程分类
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/course/topic">
-                                 课程专题
-                            </router-link>
-                        </li>
                     </ul>
                 </li>
             </ul>

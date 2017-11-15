@@ -10,44 +10,59 @@
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">姓名</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control input-sm" placeholder="讲师名称">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="col-md-3 control-label">密码</label>
-                            <div class="col-md-4">
-                                <input type="password" class="form-control input-sm">
+                                <input 
+                                v-model="obj.tc_name"
+                                type="text" 
+                                class="form-control input-sm" 
+                                placeholder="讲师名称">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">入职时间</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control input-sm">
-                            </div>
+                                <DatePicker 
+                                :value="obj.tc_join_date" 
+                                format="yyyy-MM-dd" 
+                                type="date" 
+                                placeholder="Select date" 
+                                style="width: 100%">
+                                </DatePicker>
+                             </div>
+                            <!-- <div class="col-md-4">
+                                <input  
+                                v-model="obj.tc_join_date"
+                                type="text" 
+                                class="form-control input-sm">
+                            </div> -->
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">类型</label>
                             <div class="col-md-2">
-                                <select name="" class="form-control input-sm">
-                                    <option value="">讲师</option>
-                                    <option value="">管理员</option>
+                                <select 
+                                v-model="obj.tc_type"
+                                name="" 
+                                class="form-control input-sm">
+                                    <option value="1">讲师</option>
+                                    <option value="2">管理员</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="" class="col-md-3 control-label">性别</label>
+                            <label 
+                            for="" 
+                            class="col-md-3 control-label">性别</label>
                             <div class="col-md-4">
                                 <label class="radio-inline">
-                                    <input type="radio" checked> 男
+                                    <input type="radio" value="0" v-model="obj.tc_gender"> 男
                                 </label>
-                                <label class="radio-inline">
-                                    <input type="radio"> 女
+                                <label class="radio-inline" >
+                                    <input type="radio" value="1"  v-model="obj.tc_gender"> 女
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-7">
-                                <a href="./advert_list.html" class="btn btn-success btn-sm pull-right"> 添 加 </a>
+                                <Button @click="createdAteacher"  class="btn btn-success btn-sm pull-right"> 添 加 </Button>
                             </div>                          
                         </div>
                     </form>
@@ -56,6 +71,8 @@
 </template>
 
 <script>
+import { Button } from "iview";
+import { DatePicker } from "iview";
 import $ from 'jquery'
 export default {
     data(){
@@ -69,9 +86,13 @@ export default {
     },
     methods:{
         getTeacher(){
-            $.get('/api/teacher/edit',{tc_id:this.id}).then(function(data){
+            $.get('/api/teacher/edit',{tc_id:this.id}).then((data)=>{
                 console.log(data)
+                this.obj = data.result
             })
+        },
+        createdAteacher(){
+            console.log(this.obj)
         }
     }
 }
