@@ -92,6 +92,11 @@ export default {
             })
         },
         createdAteacher(){
+            let url = ''
+            // $.post(url,this.obj).then(function(data){
+            //     console.log(data);
+            //     this.$route.push('/home');
+            // })
             console.log(this.obj)
         }
     }
