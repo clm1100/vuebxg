@@ -46,7 +46,7 @@ export default {
         logout:function(){
             let _this = this
             console.log(this.$route);
-            let api = 'api/logout'
+            let api = '/api/logout'
             $.post(api,function(info){
                  if(info.code === '200'){
                      _this.$router.push('/login')

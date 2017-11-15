@@ -42,13 +42,23 @@
                                 <td>{{item.tc_gender==1?'女':'男'}}</td>
                                 <td>{{item.tc_join_date}}</td>
                                 <td>
-                                    <Button size="small" type="primary" @click="modal1 = true">查看</Button>
-                                    <Button size="small" type="success" @click="modal1 = true">
-                                        <router-link to="/teacher/list/313131" class="acolor">
+                                    <Button size="small" 
+                                        type="primary"  
+                                        @click="getAteacher(item.tc_id)">
+                                        查看
+                                    </Button>
+                                    <Button size="small" type="success" >
+                                        <router-link 
+                                        v-bind="{to:'/teacher/list/'+item.tc_id}"
+                                        class="acolor" >
                                              编辑
                                         </router-link>                                     
                                     </Button>
-                                    <Button size="small" type="warning" @click="modal1 = true">注销</Button>    
+                                    <Button size="small" 
+                                    type="warning" 
+                                    @click="modal1 = true">
+                                        注销
+                                    </Button>    
                                 </td>
                             </tr>
                         </tbody>
@@ -56,12 +66,57 @@
                 </div>
                 <Modal
                     v-model="modal1"
-                    title="Common Modal dialog box title"
+                    title="讲师信息"
+                    ok-text="测试按钮"
                     @on-ok="ok"
-                    @on-cancel="cancel">
-                    <p>Content of dialog</p>
-                    <p>Content of dialog</p>
-                    <p>Content of dialog</p>
+                    @on-cancel="cancel"
+                    >
+                    <div class="panel-body">
+                    <table id="modalTeacherInfo" class="table table-bordered table-condensed">
+                    <tbody>
+                        <tr>
+                            <th>姓名:</th><td>{{ obj.tc_name }}</td>
+                            <th>职位:</th><td colspan="3">讲师</td>
+                            <td rowspan="4" width="128">
+                                <div class="avatar">
+                                     <img :src="obj.tc_avatar" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>花名:</th><td>{{ obj.tc_roster }}</td>
+                            <th>出生日期:</th><td colspan="3">{{ obj.tc_birthday }}</td>
+                        </tr>
+                        <tr>
+                            <th>性别:</th><td>{{ obj.tc_gender == 0 ? '男' : '女' }}</td>
+                            <th>入职时间:</th><td colspan="3">{{ obj.tc_join_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>手机号码:</th><td colspan="2">{{ obj.tc_cellphone }}</td>
+                            <th>邮箱:</th><td colspan="2">{{ obj.tc_email }}</td>
+                        </tr>
+                        <tr>
+                            <th>籍贯:</th><td colspan="6">{{ obj.tc_hometown  }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="7">
+                                <div class="introduce">
+                                    {{ obj.tc_introduce }}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <!-- <span slot="footer">56789</span> -->
+                <div slot="footer" >
+                    <Button size="small"  type="success" @click='cancel' >
+                        <span>取消</span>
+                    </Button> 
+                    <Button size="small"  type="success"  @click="ok" >
+                        <span>测试按钮</span>
+                    </Button>
+                </div>
                 </Modal>
             </div>
 </template>
@@ -74,24 +129,40 @@ export default {
     data(){
         return {
             modal1: false,
-            list:[]
+            list:[],
+            obj:{},
+            resetObj:{}
         }
     },
     created() {
        this.getTeacherList()
     },
     methods:{
+        getAteacher(id){
+            let api = '/api/teacher/view';
+            $.get(api,{tc_id:id}).then((data)=>{
+                this.obj = data.result
+                console.log(data.result)
+                this.modal1 = true;
+            })
+        },
         getTeacherList(){
             let api= '/api/teacher'
             $.post(api).then((data)=>{
                 this.list  = data.result
             })
         },
-        ok () {
-                // this.$Message.info('Clicked ok');
+        ok () { this.modal1 = false;
+                this.obj = Object.assign({},this.resetObj)
         },
-        cancel () {
-            // this.$Message.info('Clicked cancel');
+        cancel () {this.modal1 = false;
+            this.obj = Object.assign({},this.resetObj)
+            // this.$Message.info('Clicked cancel')
+            // 另外一种方法
+            // for(var name in this.obj) {
+            //     console.log(this.obj[name])
+            //     this.obj[name] = ""
+            // };
         }
     }
 }

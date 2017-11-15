@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import AsideBar from  '../components/AsideBar'
+import AsideBar from  '@/common/AsideBar'
 import BHeader from '../common/BHeader'
 export default {
 
