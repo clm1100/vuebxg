@@ -11,6 +11,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const env = config.build.env
+// 调试信息打印log
+console.log(utils.styleLoaders({
+  sourceMap: config.build.productionSourceMap,
+  extract: true
+}))
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {

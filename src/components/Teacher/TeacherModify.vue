@@ -92,12 +92,13 @@ export default {
             })
         },
         createdAteacher(){
-            let url = ''
-            // $.post(url,this.obj).then(function(data){
-            //     console.log(data);
-            //     this.$route.push('/home');
-            // })
-            console.log(this.obj)
+            let url = '/api/teacher/update'
+            let _this = this;
+            $.post(url,this.obj).then((data)=>{
+                // this.$router.push({path: '/home',query:{stage: 212331}});
+                this.$router.push('/home');
+            })
+            
         }
     }
 }

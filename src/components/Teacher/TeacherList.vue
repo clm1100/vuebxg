@@ -72,7 +72,7 @@
                     @on-cancel="cancel"
                     >
                     <div class="panel-body">
-                    <table id="modalTeacherInfo" class="table table-bordered table-condensed">
+                    <table  class="table table-bordered table-condensed">
                     <tbody>
                         <tr>
                             <th>姓名:</th><td>{{ obj.tc_name }}</td>
