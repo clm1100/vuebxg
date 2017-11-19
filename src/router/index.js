@@ -5,8 +5,9 @@ import TeacherAdd from '@/components/Teacher/TeacherAdd'
 import TeacherModify from '@/components/Teacher/TeacherModify'
 import CourseAdd from '@/components/Course/courseAdd'
 
-import CategoryList from '@/components/Category/courseList'
-import CategoryAdd from '@/components/Category/courseAdd'
+import CategoryList from '@/components/Category/categoryList'
+import CategoryAdd from '@/components/Category/categoryAdd'
+import CategoryModify from '@/components/Category/categoryModify'
 
 import TeacherList from '@/components/Teacher/TeacherList'
 import Login from '@/components/Login'
@@ -74,6 +75,10 @@ const router = new Router({
         {
           path: '/category/list',
           component: CategoryList
+        },
+        {
+          path: '/category/list/:id',
+          component: CategoryModify
         }
       ]
     }
