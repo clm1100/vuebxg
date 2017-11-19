@@ -4,6 +4,10 @@ import Loadbash from '@/components/Loadbash'
 import TeacherAdd from '@/components/Teacher/TeacherAdd'
 import TeacherModify from '@/components/Teacher/TeacherModify'
 import CourseAdd from '@/components/Course/courseAdd'
+
+import CategoryList from '@/components/Category/courseList'
+import CategoryAdd from '@/components/Category/courseAdd'
+
 import TeacherList from '@/components/Teacher/TeacherList'
 import Login from '@/components/Login'
 import Profile from '@/components/profile/profile'
@@ -58,6 +62,18 @@ const router = new Router({
         {
           path: '/course/list',
           component: TeacherAdd
+        },
+        {
+          path: '/category',
+          redirect: '/category/list'
+        },
+        {
+          path: '/category/add',
+          component: CategoryAdd
+        },
+        {
+          path: '/category/list',
+          component: CategoryList
         }
       ]
     }

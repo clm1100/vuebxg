@@ -26,6 +26,12 @@
                     </router-link>
                 </li>
                 <li>
+                    <router-link to="/category">
+                        <i class="fa fa-bell"></i>
+                        分类管理
+                    </router-link>
+                </li>
+                <li>
                     <a href="javescript:;" @click="showOrHide">
                         <i class="fa fa-cog"></i>
                         课程管理
