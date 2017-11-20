@@ -30,11 +30,12 @@
                         <td>
                            <Button size="small" type="success" >
                                         <router-link 
-                                        v-bind="{to:'/category/list/'+item.tc_id}"
+                                        v-bind="{to:'/category/list/'+item.cg_id}"
                                         class="acolor" >
                                              编辑
                                         </router-link>                                     
-                                    </Button>
+                            </Button>
+                            
                         </td>
 
                     </tr>
@@ -60,8 +61,7 @@ export default {
   },
   methods:{
        getCategory(){
-           $.get('/api/category',(data)=>{
-               console.log(data);
+           $.get('/api/v8/category',(data)=>{
                this.list = data.result
            })
        }
@@ -71,5 +71,5 @@ export default {
 
 
 <style scoped>
-
+.acolor{color: #fff}
 </style>

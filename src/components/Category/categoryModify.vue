@@ -11,7 +11,11 @@
                         <div class="form-group">
                             <label for="" class="col-md-4 control-label">名称</label>
                             <div class="col-md-3">
-                                <input type="text" class="form-control input-sm" placeholder="填写分类名称">
+                                <input 
+                                v-model="obj.cg_name"
+                                type="text" 
+                                class="form-control input-sm" 
+                                placeholder="填写分类名称">
                             </div>
                         </div>
                         <div class="form-group">
@@ -56,11 +60,34 @@
 </template>
 
 <script>
-export default {
-    components:{
+import { Button } from "iview";
+import $ from 'jquery'
+export default {    
+    data(){
+        return {
+            id:this.$route.params.id,
+            obj:{}
+        }
     },
     created(){
-        console.log(this.$route.params.id)
+        this.getCategory()
+    },
+    methods:{
+        getCategory(){
+            $.get('/api/v8/category/edit',{tc_id:this.id}).then((data)=>{
+                console.log(data)
+                this.obj = data.result
+            })
+        },
+        createdAteacher(){
+            let url = '/api/teacher/update'
+            let _this = this;
+            $.post(url,this.obj).then((data)=>{
+                // this.$router.push({path: '/home',query:{stage: 212331}});
+                this.$router.push('/home');
+            })
+            
+        }
     }
 }
 </script>
