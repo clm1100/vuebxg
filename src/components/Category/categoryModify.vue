@@ -21,7 +21,7 @@
                         <div class="form-group">
                             <label for="" class="col-md-4 control-label">级别</label>
                             <div class="col-md-2">
-                                <select name="" class="form-control input-sm">
+                                <select  name="" class="form-control input-sm">
                                     <option value="">顶级分类</option>
                                     <option value="">前端开发</option>
                                     <option value="">后端开发</option>

@@ -1,109 +1,100 @@
 <template>
   <!-- 主体 -->
-     <div class="body course-add">
+   <div class="body course-category">
                 <!-- 面包屑 -->
                 <ol class="breadcrumb">
                     <li><a href="javascript:;">课程管理</a></li>
-                    <li class="active">课程添加</li>
+                    <li class="active">课程分类</li>
                 </ol>
-                <div class="steps">
-                    <!-- 摘要 -->
-                    <div class="brief">
-                        <div class="thumb">
-                            <img src="###" alt="">
+                <div class="category-add">
+                    <form @submit.prevent = "createCategory" action="" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-md-4 control-label">名称</label>
+                            <div class="col-md-3">
+                                <input 
+                                v-model="obj.cg_name"
+                                type="text"
+                                 class="form-control input-sm" 
+                                 placeholder="填写分类名称">
+                            </div>
                         </div>
-                        <dl class="info">
-                            <dt>Git 指南</dt>
-                            <dd>讲师：李鹏周</dd>
-                            <dd>课时：32</dd>
-                        </dl>
-                    </div>
-                    <!-- 步聚 -->
-                    <ul class="forwards list-unstyled">
-                        <li>
-                            <a href="./course_add_step1.html" class="active">
-                            <b>1</b>
-                            基本信息
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./course_add_step2.html">
-                            <b>2</b>
-                            课程图片
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./course_add_step3.html">
-                            <b>3</b>
-                            课时管理
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- 基本信息 -->
-                    <div class="content">
-                        <!-- 标题 -->
-                        <div class="title">
-                            <h5>基本信息 <small>BASIC INFORMATION</small></h5>
+                        <div class="form-group">
+                            <label for="" class="col-md-4 control-label">级别</label>
+                            <div class="col-md-2">
+                                <select v-model="obj.cg_pid" name="" class="form-control input-sm">
+                                    <option value=0>顶级分类</option>
+                                    <option 
+                                    v-for="item in list"
+                                    :value="item.cg_id">
+                                    {{item.cg_name}}
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                        <form action="" class="basic form-horizontal">
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">标题</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input-sm" value="Git指南">
-                                </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-4 control-label">排序</label>
+                            <div class="col-md-1">
+                                <input 
+                                type="text" 
+                                class="form-control input-sm" 
+                                v-model="obj.cg_order">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">课程描述</label>
-                                <div class="col-md-8 ckeditor">
-                                    <textarea name="" rows="15" class="form-control input-sm"></textarea>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-md-4 control-label">是否显示</label>
+                            <div class="col-md-3">
+                                <label class="checkbox-inline">
+                                    <input value="1" name="cg_is_hide" type="radio" v-model="obj.cg_is_hide" > 是
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input value="0" name="cg_is_hide" type="radio" v-model="obj.cg_is_hide"> 否
+                                </label>
                             </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">讲师</label>
-                                <div class="col-md-8">
-                                    <select name="" class="form-control input-sm">
-                                        <option value="">李鹏周</option>
-                                        <option value="">汪磊</option>
-                                        <option value="">蒋坤</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">分类</label>
-                                <div class="col-md-8">
-                                    <select name="" class="form-control input-sm">
-                                        <option value="">互联网</option>
-                                    </select>
-                                    <select name="" class="form-control input-sm">
-                                        <option value="">网页设计</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">标签</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input-sm">
-                                    <p class="help-block">将会应用于按标签搜索课程、相关课程的提取等</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <Button type="primary">Primary</Button>
-                                    <a href="./course_add_step2.html" class="btn btn-success btn-sm pull-right">保 存</a>
-                                </div>                          
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-8">
+                                <button  class="btn btn-success btn-sm pull-right">保存</button>
+                            </div>                          
+                        </div>
+                    </form>
                 </div>
             </div>
 </template>
 
 <script>
-import { Button, Table } from 'iview'
+import $ from 'jquery'
 export default {
     components:{
-        Button,
-        Table
+    },
+    data(){
+        return{
+            obj:{
+                cg_pid:"0",
+                cg_is_hide:'1'
+            },
+            list:[]
+        }
+    },
+    methods:{
+        getCategory(){
+            var url = '/api/category/top'
+            $.get(url).then((data)=>{
+                console.log(data)
+                this.list = data.result
+            })
+        },
+        createCategory(){
+            var url = '/api/category/add'
+            console.log(this.obj);
+            $.post(url,this.obj).then((data)=>{
+                if(data.code=="200"){
+                    this.$router.push('/')
+                }
+            })
+        }
+    },
+    created(){
+        this.getCategory()
     }
 }
 </script>

@@ -5,8 +5,10 @@
             <li><a href="javascript:;">课程管理</a></li>
             <li class="active">课程分类</li>
         </ol>
-        <div class="page-title">
-            <a href="./course_category_add.html" class="btn btn-success btn-sm pull-right">添加分类</a>
+         <div class="page-title">
+                    <router-link to="/category/add" class="btn btn-success btn-sm pull-right">
+                        添加分类
+                    </router-link>
         </div>
         <div class="panel panel-default">
             <table class="table table-bordered">
@@ -61,7 +63,7 @@ export default {
   },
   methods:{
        getCategory(){
-           $.get('/api/v8/category',(data)=>{
+           $.get('/api/category',(data)=>{
                this.list = data.result
            })
        }
