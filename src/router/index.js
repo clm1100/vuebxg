@@ -1,17 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+// 登陆，个人页面，控制台页面相关组件
 import Loadbash from '@/components/Loadbash'
+import Login from '@/components/Login'
+import Profile from '@/components/profile/profile'
+
+// 老师页面相关组件
+import TeacherList from '@/components/Teacher/TeacherList'
 import TeacherAdd from '@/components/Teacher/TeacherAdd'
 import TeacherModify from '@/components/Teacher/TeacherModify'
-import CourseAdd from '@/components/Course/courseAdd'
 
+// 课程页面相关组件
+import CourseAdd from '@/components/Course/courseAdd'
+import CourseStep1 from '@/components/Course/courseStep1'
+import CourseStep2 from '@/components/Course/courseStep2'
+import CourseStep3 from '@/components/Course/courseStep3'
+
+// 种类页面相关组件
 import CategoryList from '@/components/Category/categoryList'
 import CategoryAdd from '@/components/Category/categoryAdd'
 import CategoryModify from '@/components/Category/categoryModify'
 
-import TeacherList from '@/components/Teacher/TeacherList'
-import Login from '@/components/Login'
-import Profile from '@/components/profile/profile'
 var VueCookie = require('vue-cookie')
 Vue.use(Router)
 
@@ -59,6 +69,18 @@ const router = new Router({
         {
           path: '/course/add',
           component: CourseAdd
+        },
+        {
+          path: '/course/add/step1/:id',
+          component: CourseStep1
+        },
+        {
+          path: '/course/add/step2/:id',
+          component: CourseStep2
+        },
+        {
+          path: '/course/add/step3/:id',
+          component: CourseStep3
         },
         {
           path: '/course/list',

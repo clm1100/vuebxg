@@ -5,7 +5,6 @@
         <div class="profile">
             <!-- 头像 -->
             <div class="avatar img-circle">
-                <!-- <img src="../assets/avatar.jpg"> -->
                   <img :src="tc_avatar" :onerror="defaultImg">
             </div>
             <h4 v-text="tc_name"></h4>
@@ -69,7 +68,7 @@ export default {
   },
   created(){
     this.tc_name=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_name,
-    this.tc_avatar=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_avatar||'../assets/avatar.jpg'
+    this.tc_avatar=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_avatar
 },
   mounted(){
       

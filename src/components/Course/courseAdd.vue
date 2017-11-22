@@ -1,111 +1,58 @@
 <template>
   <!-- 主体 -->
-     <div class="body course-add">
-                <!-- 面包屑 -->
-                <ol class="breadcrumb">
-                    <li><a href="javascript:;">课程管理</a></li>
-                    <li class="active">课程添加</li>
-                </ol>
-                <div class="steps">
-                    <!-- 摘要 -->
-                    <div class="brief">
-                        <div class="thumb">
-                            <img src="###" alt="">
-                        </div>
-                        <dl class="info">
-                            <dt>Git 指南</dt>
-                            <dd>讲师：李鹏周</dd>
-                            <dd>课时：32</dd>
-                        </dl>
-                    </div>
-                    <!-- 步聚 -->
-                    <ul class="forwards list-unstyled">
-                        <li>
-                            <a href="./course_add_step1.html" class="active">
-                            <b>1</b>
-                            基本信息
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./course_add_step2.html">
-                            <b>2</b>
-                            课程图片
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./course_add_step3.html">
-                            <b>3</b>
-                            课时管理
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- 基本信息 -->
-                    <div class="content">
-                        <!-- 标题 -->
-                        <div class="title">
-                            <h5>基本信息 <small>BASIC INFORMATION</small></h5>
-                        </div>
-                        <form action="" class="basic form-horizontal">
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">标题</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input-sm" value="Git指南">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">课程描述</label>
-                                <div class="col-md-8 ckeditor">
-                                    <textarea name="" rows="15" class="form-control input-sm"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">讲师</label>
-                                <div class="col-md-8">
-                                    <select name="" class="form-control input-sm">
-                                        <option value="">李鹏周</option>
-                                        <option value="">汪磊</option>
-                                        <option value="">蒋坤</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">分类</label>
-                                <div class="col-md-8">
-                                    <select name="" class="form-control input-sm">
-                                        <option value="">互联网</option>
-                                    </select>
-                                    <select name="" class="form-control input-sm">
-                                        <option value="">网页设计</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-md-2 control-label">标签</label>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control input-sm">
-                                    <p class="help-block">将会应用于按标签搜索课程、相关课程的提取等</p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    <Button type="primary">Primary</Button>
-                                    <a href="./course_add_step2.html" class="btn btn-success btn-sm pull-right">保 存</a>
-                                </div>                          
-                            </div>
-                        </form>
+<div class="body course-add">
+        <!-- 面包屑 -->
+        <ol class="breadcrumb">
+            <li><a href="javascript:;">课程管理</a></li>
+            <li class="active">创建课程</li>
+        </ol>
+        <div class="steps create">
+            <div class="title">
+                <h5>创建课程 <small>CREATE A COURSE</small></h5>
+            </div>
+            <form @submit.prevent='createCourse' id="createForm" class="form-horizontal col-xs-7">
+                <div class="form-group">
+                    <label for="" class="col-xs-2 control-label">课程标题</label>
+                    <div class="col-xs-9">
+                        <input 
+                        v-model="cs_name"
+                        type="text" 
+                        class="form-control input-sm" 
+                        name="cs_name" 
+                        placeholder="请填写课程标题">
                     </div>
                 </div>
+                <div class="col-xs-11">
+                    <button type="submit" class="btn btn-success btn-sm pull-right">创建课程</button>
+                </div>
+            </form>
+            <div class="extra col-xs-3">
+                <h5>从视频专辑导入课程</h5>
+                <p>已支持优酷、腾讯视频、网易公开课、爱奇艺教育的视频专辑导入。</p>
             </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script>
-import { Button, Table } from 'iview'
+import $ from 'jquery'
 export default {
-    components:{
-        Button,
-        Table
+    data(){
+        return {
+            cs_name:''
+        }
+    },
+    methods:{
+        createCourse(){
+            var url = '/api/course/create'
+            $.get(url,{cs_name:this.cs_name}).then((data)=>{
+                console.log(data);
+                this.$router.push('/course/add/step1/'+data.result.cs_id)
+            })
+        }
     }
-}
+};
 </script>
 
 
