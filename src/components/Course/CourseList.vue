@@ -1,178 +1,88 @@
 <template>
-    <div class="body course-category">
-        <!-- 面包屑 -->
-        <ol class="breadcrumb">
-            <li><a href="javascript:;">课程管理</a></li>
-            <li class="active">课程分类</li>
-        </ol>
-        <div class="page-title">
-            <a href="./course_category_add.html" class="btn btn-success btn-sm pull-right">添加分类</a>
-        </div>
-        <div class="panel panel-default">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th width="18%">分类名称</th>
-                        <th>课程数量</th>
-                        <th>是否显示</th>
-                        <th>排序</th>
-                        <th width="10%">操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="active">
-                        <td class="text-left">前端开发</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├ HTML/CSS</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├ Javascript</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├ 移动Web</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr class="active">
-                        <td class="text-left">后端开发</td>
-                        <td>14</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├ NodeJS</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├ PHP</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr class="active">
-                        <td class="text-left">数据库</td>
-                        <td>18</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├ Mysql</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├  MongoDB</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├  Oracle</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr class="active">
-                        <td class="text-left">云计算&大数据</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├  大数据</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├  云计算</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr class="active">
-                        <td class="text-left">视觉设计</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-left">&nbsp;&nbsp;├  Photoshop</td>
-                        <td>12</td>
-                        <td>是</td>
-                        <td>10</td>
-                        <td>
-                            <a href="./course_category_add.html" class="btn btn-info btn-xs">编辑</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<div class="body course-list">
+                <!-- 面包屑 -->
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">课程管理</a></li>
+                    <li class="active">课程列表</li>
+                </ol>
+                <div class="courses" id="course">
+                    <!-- 搜索 -->
+                    <div class="search">
+                        <form action="" class="form-inline">
+                            <select name="" class="form-control input-sm">
+                                <option value="">按讲师</option>
+                            </select>
+                            <select name="" class="form-control input-sm">
+                                <option value="">按类别</option>
+                            </select>
+                            <select name="" class="form-control input-sm">
+                                <option value="">按课时</option>
+                            </select>
+                            <button class="btn btn-success btn-sm">筛选</button>
+                            <div class="input-group pull-right">
+                                <input type="text" class="form-control input-sm">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success btn-sm">搜索</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                    <div key="item.cs_id" v-for="item in list" class="course">
+                        <div class="pic">
+                            <img :src="item.cs_cover" alt="">
+                        </div>
+                        <div class="info">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <span>讲师：{{ item.tc_name }}</span>
+                                    <span>类别：{{ item.cg_name }}</span>
+                                </li>
+                                <li>
+                                    <span>课时：32</span>
+                                    <span>学员：9823</span>
+                                </li>
+                                <li>
+                                    <span>浏览：11313</span>
+                                    <span></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 分页 -->
+                <ul class="pagination pull-right">
+                    <li><a href="#">上一页</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </div>
+
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
-  components: {}
+    data(){
+        return {
+            list:[]
+        }
+    },
+    created(){
+        this.getData()
+    },
+    methods:{
+        getData(){
+            $.get('/api/course').then((data)=>{
+                console.log(data.result[0])
+                this.list = data.result.splice(0,100)
+            })
+        }
+    }
 };
 </script>
 

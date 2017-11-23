@@ -9,7 +9,7 @@
                     <!-- 摘要 -->
                     <div class="brief">
                         <div class="thumb">
-                            <img :src="obj.tc_avatar" :onerror="defaultImg">                           
+                            <img :src="obj.cs_cover" :onerror="defaultImg">                           
                         </div>
                         <dl class="info">
                             <dt>{{obj.cs_name}}</dt>
@@ -19,22 +19,29 @@
                     <!-- 步聚 -->
                     <ul class="forwards list-unstyled">
                         <li>
-                            <a href="./course_add_step1.html" class="active">
-                            <b>1</b>
-                            基本信息
-                            </a>
+                            <router-link 
+                             v-bind="{to:'/course/add/step1/'+obj.cs_id}"
+                             class="active">
+                                <b>1</b>
+                                 基本信息
+                            </router-link>
                         </li>
                         <li>
-                            <a href="./course_add_step2.html">
-                            <b>2</b>
-                            课程图片
-                            </a>
+                            <router-link 
+                             v-bind="{to:'/course/add/step2/'+obj.cs_id}"
+                             >
+                                <b>2</b>
+                                课程图片
+                            </router-link>
+                        
                         </li>
                         <li>
-                            <a href="./course_add_step3.html">
+                            <router-link 
+                             v-bind="{to:'/course/add/step3/'+obj.cs_id}"
+                             >
                             <b>3</b>
                             课时管理
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                     <!-- 基本信息 -->
@@ -43,7 +50,7 @@
                         <div class="title">
                             <h5>基本信息 <small>BASIC INFORMATION</small></h5>
                         </div>
-                        <form action="" class="basic form-horizontal">
+                        <form @submit.prevent="updateCourse" action="" class="basic form-horizontal">
                             <div class="form-group">
                                 <label for="" class="col-md-2 control-label">标题</label>
                                 <div class="col-md-8">
@@ -96,7 +103,7 @@
                                     class="form-control input-sm">
                                         <option value="0">请选择</option>
                                         <option
-                                        v-for="item in childid" 
+                                        v-for="item in obj.category.childs" 
                                         :value="item.cg_id">{{item.cg_name}}</option>
                                     </select>
                                 </div>
@@ -104,13 +111,21 @@
                             <div class="form-group">
                                 <label for="" class="col-md-2 control-label">标签</label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control input-sm">
-                                    <p class="help-block">将会应用于按标签搜索课程、相关课程的提取等</p>
+                                    <input 
+                                    v-model="obj.cs_tags"
+                                    type="text" 
+                                    class="form-control input-sm">
+                                    <p class="help-block">
+                                        将会应用于按标签搜索课程、相关课程的提取等
+                                    </p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10">
-                                    <a href="./course_add_step2.html" class="btn btn-success btn-sm pull-right">保 存</a>
+                                    <button  
+                                    class="btn btn-success btn-sm pull-right">
+                                    保 存
+                                    </button>
                                 </div>                          
                             </div>
                         </form>
@@ -137,15 +152,18 @@ export default {
             },
             defaultImg: 'this.src="' + require('../../assets/images/course.png') + '"',
             obj:{
-                cs_cg_pid:0,
-                cs_cg_id:'0',
+                cs_id:this.$route.params.id,  
+                cs_name:'',                
+                cs_brief:'', 
                 cs_tc_id:'0',
+                cs_tags:'',
+                cs_cg_id:'0',
+                cs_cg_pid:0,
                 category:{
-                    top:''
-                },
-                cs_brief:'',
-                tc_avatar:'',
-                cs_id:this.$route.params.id
+                    top:'',
+                    childs:''
+                },      
+                cs_cover:'',
             },
             childid:[]
         }
@@ -174,12 +192,22 @@ export default {
         getChild(ele){
             // console.log(this.obj.cs_cg_id);
             this.obj.cs_cg_id= "0"
+            this.obj.category.childs = [];
             console.log(ele.target.value)
             var url = '/api/category/child'
             $.get(url,{cg_id:ele.target.value}).then((data)=>{
                 console.log(data);
-                this.childid = data.result
+                this.obj.category.childs = data.result
             })            
+        },
+        updateCourse(){
+            let  {cs_id,cs_name,cs_brief,cs_tc_id,cs_cg_id,cs_tags} = this.obj;
+            let objData = {cs_id,cs_name,cs_brief,cs_tc_id,cs_cg_id,cs_tags};
+            $.post('/api/course/update/basic',objData).then((data)=>{
+                console.log(data);
+                this.$router.push('/course/add/step2/'+this.obj.cs_id)
+            })
+            
         }
 
     }

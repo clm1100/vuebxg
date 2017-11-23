@@ -7,7 +7,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
-
+const webpack =require('webpack')
 module.exports = {
   entry: {
     app: './src/main.js'
@@ -23,7 +23,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': resolve('src'),
-    }
+      'jquery': 'jquery' 
+    },
   },
   module: {
     rules: [
@@ -77,5 +78,11 @@ module.exports = {
       //   ]
       // }
     ]
-  }
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    })
+ ],
 }
