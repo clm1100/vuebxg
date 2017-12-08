@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./settings.html">
+                    <a href="/profile">
                         <i class="fa fa-user"></i>
                         个人中心
                     </a>

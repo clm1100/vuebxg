@@ -55,30 +55,31 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: "HelloWorld",
+  data() {
     return {
-      show:false,
-      tc_name:'',
-      tc_avatar:'',
-      defaultImg: 'this.src="' + require('../assets/avatar.jpg') + '"'
+      show: false,
+      //   tc_name:'',
+      //   tc_avatar:'',
+      defaultImg: 'this.src="' + require("../assets/avatar.jpg") + '"'
+    };
+  },
+  created() {
+    // this.tc_name=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_name,
+    // this.tc_avatar=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_avatar
+  },
+  computed: {
+      ...mapState(["tc_name", "tc_avatar"])
+  },
+  methods: {
+    showOrHide: function() {
+      this.show = !this.show;
     }
-  },
-  created(){
-    this.tc_name=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_name,
-    this.tc_avatar=JSON.parse(this.$cookie.get('userInfo')||'{}').tc_avatar
-},
-  mounted(){
-      
-  },
-  methods:{
-      showOrHide:function(){
-          this.show = !this.show
-      }
   }
-}
+};
 </script>
 
 

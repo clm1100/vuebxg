@@ -112,7 +112,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // ...
   if (to.path !== '/login') {
-    console.log(!VueCookie.get('PHPSESSID'))
+    // console.log(!VueCookie.get('PHPSESSID'))
     if (!VueCookie.get('PHPSESSID')) {
       return next('/login')
     }
