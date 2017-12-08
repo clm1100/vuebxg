@@ -19,14 +19,15 @@ const mutations = {
 
 const actions = {
   initHeaderst(context) {
-    console.log('============================')
-    let obj = VueCookie.get('userInfo')
+    let obj = JSON.parse(VueCookie.get('userInfo') || '{}')
     context.commit('initHeaderst', obj)
   }
 }
+const getters = { }
 
-export default {
+export default new vuex.Store({
   state,
   mutations,
-  actions
-}
+  actions,
+  getters
+})

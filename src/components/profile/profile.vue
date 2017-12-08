@@ -118,8 +118,6 @@ export default {
     },
     created(){
     this.getData();
-    console.log(this.$store)
-    this.$store.commit('initHeaderst')
     },
     methods:{
         change(){
@@ -135,10 +133,10 @@ export default {
                 contentType:false
             }).then((data)=>{
                 let obj = JSON.parse(this.$cookie.get('userInfo')||"{}")
-                obj.tc_avatar = data.result.path;
+                obj.tc_avatar = data.result.path
                 let objstr = JSON.stringify(obj);
                 this.$cookie.set('userInfo',objstr);
-                console.log(this.$cookie.get('userInfo'))
+                this.obj.tc_avatar=data.result.path                
                 this.initHeaderst()
             })
         },
