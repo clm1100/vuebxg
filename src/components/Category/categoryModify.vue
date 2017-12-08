@@ -7,7 +7,7 @@
                     <li class="active">课程分类</li>
                 </ol>
                 <div class="category-add">
-                    <form action="" class="form-horizontal">
+                    <form @submit.prevent="updateCategory" class="form-horizontal">
                         <div class="form-group">
                             <label for="" class="col-md-4 control-label">名称</label>
                             <div class="col-md-3">
@@ -21,13 +21,9 @@
                         <div class="form-group">
                             <label for="" class="col-md-4 control-label">级别</label>
                             <div class="col-md-2">
-                                <select  name="" class="form-control input-sm">
-                                    <option value="">顶级分类</option>
-                                    <option value="">前端开发</option>
-                                    <option value="">后端开发</option>
-                                    <option value="">数据库</option>
-                                    <option value="">云计算&大数据</option>
-                                    <option value="">视觉设计</option>
+                                <select v-model="obj.cg_pid"  name="" class="form-control input-sm">
+                                    <option value="0">顶级分类</option>
+                                    <option  :value="item.cg_id" v-for="item in obj.top" value="">{{item.cg_name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -41,16 +37,19 @@
                             <label for="" class="col-md-4 control-label">是否显示</label>
                             <div class="col-md-3">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" checked> 是
+                                    <input type="radio" v-model="obj.cg_is_hide" value="0"> 是
                                 </label>
                                 <label class="checkbox-inline">
-                                    <input type="checkbox"> 否
+                                    <input type="radio" v-model="obj.cg_is_hide" value="1"> 否
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-md-8">
-                                <a href="./course_category.html" class="btn btn-success btn-sm pull-right">保存</a>
+                                <button
+                                 class="btn btn-success btn-sm pull-right">
+                                 保存
+                                </button>
                             </div>                          
                         </div>
                     </form>
@@ -74,17 +73,19 @@ export default {
     },
     methods:{
         getCategory(){
-            $.get('/api/v8/category/edit',{tc_id:this.id}).then((data)=>{
+            $.get('/api/category/edit',{cg_id:this.id}).then((data)=>{
                 console.log(data)
                 this.obj = data.result
             })
         },
-        createdAteacher(){
-            let url = '/api/teacher/update'
-            let _this = this;
-            $.post(url,this.obj).then((data)=>{
-                // this.$router.push({path: '/home',query:{stage: 212331}});
-                this.$router.push('/home');
+        updateCategory(){
+            let url = '/api/category/modify'
+            let obj = Object.assign({},this.obj)
+            delete obj.top
+            console.log(obj)
+            $.post(url,obj).then((data)=>{
+                console.log(data)
+                this.$router.push('/category/list');
             })
             
         }

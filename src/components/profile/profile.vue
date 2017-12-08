@@ -105,6 +105,9 @@
 
 <script>
 import $ from 'jquery'
+// let vv = require('../../assets/region');
+import city from '../../assets/region'
+console.log(city)
 import { mapActions } from 'vuex'
 export default {
     data(){
@@ -142,6 +145,8 @@ export default {
         },
         getData(){
             $.get('/api/teacher/profile').then((data)=>{
+                console.log(data)
+                
                 this.obj = data.result;
             })
         },

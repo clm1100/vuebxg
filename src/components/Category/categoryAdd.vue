@@ -88,7 +88,7 @@ export default {
             console.log(this.obj);
             $.post(url,this.obj).then((data)=>{
                 if(data.code=="200"){
-                    this.$router.push('/')
+                    this.$router.push('/category/list')
                 }
             })
         }

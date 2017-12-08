@@ -58,7 +58,6 @@ export default {
     },
   components: {},
   created(){
-      console.log("2222")
       this.getCategory()
   },
   methods:{
