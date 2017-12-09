@@ -34,6 +34,7 @@
 
 <script>
 import $ from 'jquery'
+import { mapActions } from "vuex";
 export default {
   components:{
 
@@ -62,10 +63,12 @@ export default {
                 tc_pass:this.tc_pass
             }).then((data)=>{
                 this.$cookie.set('userInfo',JSON.stringify(data.result||'{}'))
+                this.initHeaderst();
                 this.$router.push('/')
             });
 
-        }
+        },
+        ...mapActions(['initHeaderst'])
     }
 }
 </script>
