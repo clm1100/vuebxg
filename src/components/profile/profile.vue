@@ -51,20 +51,31 @@
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">籍贯</label>
                             <div class="col-md-5">
-                                <select name="" class="form-control input-sm">
-                                    <option value="">河北省</option>
-                                    <option value="">山东省</option>
-                                    <option value="">北京市</option>
+                                <select 
+                                @change="provinceChange"
+                                name="" 
+                                class="form-control input-sm" 
+                                v-model="obj.tc_province">
+                                    <option value="0">请选择</option>
+                                    <option v-for="(v,k) in province" :value="k">{{v}}</option>                          
                                 </select>
-                                <select name="" class="form-control input-sm">
-                                    <option value="">河北省</option>
-                                    <option value="">山东省</option>
-                                    <option value="">北京市</option>
+
+
+
+                                <select 
+                                @change="cityChange"
+                                name=""
+                                 class="form-control input-sm" 
+                                 v-model="obj.tc_city">
+                                    <option checked value="0">请选择</option>
+                                    <option v-for="(v,k) in city"  :value="k">{{v}}</option>
                                 </select>
-                                <select name="" class="form-control input-sm">
-                                    <option value="">河北省</option>
-                                    <option value="">山东省</option>
-                                    <option value="">北京市</option>
+
+
+
+                                <select name="" class="form-control input-sm" v-model="obj.tc_district">
+                                    <option disabled value="0">请选择</option>
+                                    <option v-for="(v,k) in district" :value="k">{{v}}</option>
                                 </select>
                             </div>
                         </div>
@@ -106,12 +117,19 @@
 <script>
 import $ from 'jquery'
 // let vv = require('../../assets/region');
-import city from '../../assets/region'
-console.log(city)
+import objDate from '../../assets/region'
+
+let province =  objDate.p['000000']
+let city     =  objDate.c
+let district =  objDate.d
+console.log(district)
 import { mapActions } from 'vuex'
 export default {
     data(){
         return {
+            province:province,
+            city:[],
+            district:[],
             obj:'',
             sheng:[],
             defaultImg: 'this.src="' + require("../../assets/avatar.jpg") + '"'
@@ -120,10 +138,25 @@ export default {
     components:{
         
     },
+    computed: {
+    
+    },
     created(){
     this.getData();
     },
     methods:{
+        provinceChange(e){
+            console.log(e.target.value);
+            this.city = city[e.target.value]
+            this.obj.tc_city = "0"
+            this.obj.tc_district = "0"
+            this.district = null
+        },
+        cityChange(e){
+            console.log(e.target.value);
+            this.district = district[e.target.value]
+            this.obj.tc_district = "0"
+        },
         change(){
             let data = this.$refs.fileimg.files[0];
             var formdata = new FormData();
@@ -149,6 +182,9 @@ export default {
                 console.log(data)
                 console.log()
                 this.obj = data.result;
+                console.log(this.obj.tc_city.slice(0,2)+'0000')
+                this.city = city[this.obj.tc_city.slice(0,2)+'0000']
+                this.district = district[this.obj.tc_district.slice(0,4)+'00']
             })
         },
         ...mapActions(['initHeaderst'])
