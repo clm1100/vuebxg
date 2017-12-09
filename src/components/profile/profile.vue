@@ -113,6 +113,7 @@ export default {
     data(){
         return {
             obj:'',
+            sheng:[],
             defaultImg: 'this.src="' + require("../../assets/avatar.jpg") + '"'
         }
     },
@@ -146,7 +147,7 @@ export default {
         getData(){
             $.get('/api/teacher/profile').then((data)=>{
                 console.log(data)
-                
+                console.log()
                 this.obj = data.result;
             })
         },
