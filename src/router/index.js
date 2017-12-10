@@ -23,6 +23,9 @@ import CategoryList from '@/components/Category/categoryList'
 import CategoryAdd from '@/components/Category/categoryAdd'
 import CategoryModify from '@/components/Category/categoryModify'
 
+// 测试组件
+import Test from '@/test/test'
+
 var VueCookie = require('vue-cookie')
 Vue.use(Router)
 
@@ -32,6 +35,10 @@ const router = new Router({
     {
       path: '/',
       redirect: '/home'
+    },
+    {
+      path: '/test',
+      component: Test
     },
     {
       path: '/login',

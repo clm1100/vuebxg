@@ -33,19 +33,17 @@
 </template>
 
 <script>
-import $ from 'jquery'
+import $ from "jquery";
 import { mapActions } from "vuex";
 export default {
-  components:{
-
+  components: {},
+  data() {
+    return {
+      tc_name: "小白",
+      tc_pass: "123456"
+    };
   },
-  data(){
-      return {
-          tc_name:'小白',
-          tc_pass:'123456',
-      }
-  },
-  created(){
+  created() {
     // let api = '/api/login'
     // console.log(this.tc_name)
     // $.post(api,{
@@ -55,22 +53,24 @@ export default {
     //     console.log(data)
     // })
   },
-   methods: {  
-    submit:function() {  
-            let api = '/api/login'
-            $.post(api,{
-                tc_name:this.tc_name,
-                tc_pass:this.tc_pass
-            }).then((data)=>{
-                this.$cookie.set('userInfo',JSON.stringify(data.result||'{}'))
-                this.initHeaderst();
-                this.$router.push('/')
-            });
-
-        },
-        ...mapActions(['initHeaderst'])
-    }
-}
+  methods: {
+    submit: function() {
+      let api = "/api/login";
+      $.post(api, {
+        tc_name: this.tc_name,
+        tc_pass: this.tc_pass
+      }).then(data => {
+        this.$cookie.set("userInfo", JSON.stringify(data.result || "{}"), {
+          path: "/",
+          expires: '1D' 
+        });
+        this.initHeaderst();
+        this.$router.push("/");
+      });
+    },
+    ...mapActions(["initHeaderst"])
+  }
+};
 </script>
 
 <style>

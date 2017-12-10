@@ -122,7 +122,6 @@ import objDate from '../../assets/region'
 let province =  objDate.p['000000']
 let city     =  objDate.c
 let district =  objDate.d
-console.log(district)
 import { mapActions } from 'vuex'
 export default {
     data(){

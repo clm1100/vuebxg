@@ -16,6 +16,7 @@
     "iview": "^2.7.2",
     "jquery": "^3.2.1",
     "nprogress": "^0.2.0",
+    "v-verify": "^1.1.1",
     "vee-validate": "^2.0.0-rc.21",
     "vue": "^2.5.2",
     "vue-axios": "^2.0.2",
