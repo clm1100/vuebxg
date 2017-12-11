@@ -7,21 +7,35 @@
                 </ol>
                 <div class="teacher-add">
                     <form action="" class="form-horizontal col-md-offset-2">
-                        <div class="form-group">
+
+                    <!-- <div>
+                        <label for="email">邮箱：</label>
+                        <input v-validate ="'required|email'" type="text" id="email" name="myEmail">
+                    </div>
+                    <span v-show="errors.has('myEmail')">{{ errors.first('myEmail')}}</span> -->
+
+
+
+                    <div class="form-group">
                             <label for="" class="col-md-3 control-label">姓名</label>
                             <div class="col-md-4">
                                 <input 
+                                name="myEmail"
+                                v-validate ="'required'"
                                 v-model="obj.tc_name"
                                 type="text" 
                                 class="form-control input-sm" 
                                 placeholder="讲师名称">
+                                <span v-show="errors.has('myEmail')">{{ errors.first('myEmail')}}</span>
                             </div>
                         </div>
+
+
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">入职时间</label>
                             <div class="col-md-4">
                                 <DatePicker 
-                                :value="obj.tc_join_date" 
+                                v-model="obj.tc_join_date"
                                 format="yyyy-MM-dd" 
                                 type="date" 
                                 placeholder="Select date" 
@@ -71,37 +85,67 @@
 </template>
 
 <script>
+import Vue from "vue";
+import VeeValidate from "vee-validate";
+import zh_CN from "vee-validate/dist/locale/zh_CN";
+import { Validator } from "vee-validate";
+Validator.addLocale(zh_CN);
+const config = {
+  locale: "zh_CN",
+  events: "submit"
+};
+Vue.use(VeeValidate, config);
+const dictionary = {
+  zh_CN: {
+    messages: {
+      email: () => "邮箱格式不正确哦",
+      required: () => "请输入内容",
+      qq: () => "qq号码不正确"
+    }
+  }
+};
+Validator.updateDictionary(dictionary);
+
+import moment from 'moment'
+
 import { Button } from "iview";
 import { DatePicker } from "iview";
-import $ from 'jquery'
+import $ from "jquery";
 export default {
-    data(){
-        return {
-            id:this.$route.params.id,
-            obj:{}
-        }
+  data() {
+    return {
+      id: this.$route.params.id,
+      obj: {}
+    };
+  },
+  created() {
+    this.getTeacher();
+  },
+  methods: {
+    getTeacher() {
+      $.get("/api/teacher/edit", { tc_id: this.id }).then(data => {
+        this.obj = data.result;
+      });
     },
-    created(){
-        this.getTeacher()
-    },
-    methods:{
-        getTeacher(){
-            $.get('/api/teacher/edit',{tc_id:this.id}).then((data)=>{
-                console.log(data)
-                this.obj = data.result
-            })
-        },
-        createdAteacher(){
-            let url = '/api/teacher/update'
-            let _this = this;
-            $.post(url,this.obj).then((data)=>{
-                // this.$router.push({path: '/home',query:{stage: 212331}});
-                this.$router.push('/home');
-            })
-            
+    createdAteacher() {
+      let url = "/api/teacher/update";
+      let _this = this;
+      this.$validator.validateAll().then(data => {
+        if (data) {
+            let obj = Object.assign({},this.obj);
+            console.log(moment(obj.tc_join_date).format('YYYY-MM-DD'))
+            obj.tc_join_date = moment(this.obj.tc_join_date).format('YYYY-MM-DD')
+            console.log(obj.tc_join_date);
+            console.log(obj)
+          $.post(url, obj).then(data => {
+            // this.$router.push({path: '/home',query:{stage: 212331}});
+            this.$router.push('/home');
+          });
         }
+      });
     }
-}
+  }
+};
 </script>
 
 
