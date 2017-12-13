@@ -129,8 +129,8 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">个人介绍</label>
-                            <div class="col-md-5 ckeditor">
-                                <textarea name="" rows="15" class="form-control input-sm"></textarea>
+                            <div class="col-md-5">
+                                 <vue-editor v-model="obj.tc_introduce"></vue-editor>
                             </div>
                         </div>
                         <div class="form-group">
@@ -186,7 +186,7 @@ import moment from 'moment'
 
 
 
-
+import { VueEditor } from 'vue2-editor'
 import $ from 'jquery'
 import objDate from '../../assets/region'
 
@@ -207,7 +207,7 @@ export default {
         }
     },
     components:{
-        
+        VueEditor
     },
     computed: {
     
@@ -217,12 +217,19 @@ export default {
     },
     methods:{
         updateProfile(){
+            let url='/api/teacher/modify'
             this.$validator.validateAll().then((data)=>{
-                console.log(data)  
+                console.log(data) 
                 let obj = Object.assign({},this.obj)
                 obj.tc_join_date= moment(obj.tc_join_date).format('YYYY-MM-DD') 
                 obj.tc_birthday= moment(obj.tc_birthday).format('YYYY-MM-DD')
-                console.log(obj)                
+                console.log(obj)
+                delete obj.tc_avatar 
+                if(data){
+                    $.post(url,obj).then((info)=>{
+                        console.log(info)
+                    })
+                }               
 
             })
         },

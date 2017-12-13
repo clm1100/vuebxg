@@ -61,8 +61,9 @@
                                 可上传jpg, gif, png格式文件, 图片建议尺寸大于300x150，文件大小不能超过2M。
                             </p>
                             <div  class="col-md-2 upimg btn btn-success btn-sm">
-                                
-                                <input @change="updataImg" type="file"
+                                <input 
+                                @change="updataImg" 
+                                type="file"
                                 class="btn btn-success btn-sm" />
                             </div>
                             <div class="col-md-2">
@@ -82,7 +83,7 @@
 import $ from "jquery";
 import 'cropper/dist/cropper.css'
 import 'cropper'
-
+import { Button } from "iview";
 
 
 export default {
@@ -142,8 +143,11 @@ export default {
 <style scoped>
 .upimg{
     overflow: hidden;
+    width:58px;
+    height: 30px;
 }
 .upimg input{
     opacity: 0;
+    
 }
 </style>
