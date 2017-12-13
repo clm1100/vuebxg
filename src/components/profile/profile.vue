@@ -2,7 +2,7 @@
 <!-- 讲师资料 -->
             <div class="body teacher-profile">
                 <div class="settings">
-                    <form action="" class="form-horizontal">
+                    <form @submit.prevent='updateProfile' class="form-horizontal">
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">姓名</label>
                             <div class="col-md-5">
@@ -39,15 +39,27 @@
                                 </label>
                             </div>
                         </div>
+                        
+
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">出生日期</label>
                             <div class="col-md-5">
-                                <input 
-                                :value="obj.tc_birthday"
-                                type="text" 
-                                class="form-control input-sm">
+                                <DatePicker 
+                                v-model="obj.tc_birthday"
+                                format="yyyy-MM-dd" 
+                                type="date" 
+                                placeholder="Select date" 
+                                style="width: 100%">
+                                </DatePicker>
                             </div>
                         </div>
+
+
+
+
+
+
+
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">籍贯</label>
                             <div class="col-md-5">
@@ -82,19 +94,37 @@
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">手机号码</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control input-sm">
+                                <input 
+                                name="cellphone"
+                                v-validate ="'required'"
+                                v-model="obj.tc_cellphone"
+                                type="text" 
+                                class="form-control input-sm">
+                                <span v-show="errors.has('cellphone')">{{ errors.first('cellphone')}}</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">电子邮箱</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control input-sm">
+                                <input 
+                                name="myEmail"
+                                v-validate ="'required|email'"
+                                v-model="obj.tc_email"
+                                type="text" 
+                                class="form-control input-sm">
+                                <span v-show="errors.has('myEmail')">{{ errors.first('myEmail')}}</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-3 control-label">入职日期</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control input-sm">
+                                <DatePicker 
+                                v-model="obj.tc_join_date"
+                                format="yyyy-MM-dd" 
+                                type="date" 
+                                placeholder="Select date" 
+                                style="width: 100%">
+                                </DatePicker>
                             </div>
                         </div>
                         <div class="form-group">
@@ -105,7 +135,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-8">
-                                <a href="./course_add_step2.html" class="btn btn-success btn-sm pull-right">保 存</a>
+                                <button type="submit" class="btn btn-success btn-sm pull-right">保 存</button>
                                 <a href="./repass.html" class="btn btn-link btn-sm pull-right">更改密码？</a>
                             </div>
                         </div>
@@ -115,10 +145,52 @@
 </template>
 
 <script>
+
+let arr = {
+    cellphone:'电话',
+    myEmail:'邮箱'
+}
+import Vue from "vue";
+import VeeValidate from "vee-validate";
+import zh_CN from "vee-validate/dist/locale/zh_CN";
+import { Validator } from "vee-validate";
+Validator.addLocale(zh_CN);
+const config = {
+  locale: "zh_CN",
+  events: "submit"
+};
+Vue.use(VeeValidate, config);
+const dictionary = {
+  zh_CN: {
+    messages: {
+      email: () => "邮箱格式不正确哦",
+      required: (a) => "请输入您的"+arr[a],
+      qq: () => "qq号码不正确"   
+    }
+  }
+};
+Validator.updateDictionary(dictionary);
+
+import moment from 'moment'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import $ from 'jquery'
-// let vv = require('../../assets/region');
 import objDate from '../../assets/region'
 
+import { DatePicker } from "iview";
 let province =  objDate.p['000000']
 let city     =  objDate.c
 let district =  objDate.d
@@ -129,7 +201,7 @@ export default {
             province:province,
             city:[],
             district:[],
-            obj:'',
+            obj:{},
             sheng:[],
             defaultImg: 'this.src="' + require("../../assets/avatar.jpg") + '"'
         }
@@ -144,6 +216,16 @@ export default {
     this.getData();
     },
     methods:{
+        updateProfile(){
+            this.$validator.validateAll().then((data)=>{
+                console.log(data)  
+                let obj = Object.assign({},this.obj)
+                obj.tc_join_date= moment(obj.tc_join_date).format('YYYY-MM-DD') 
+                obj.tc_birthday= moment(obj.tc_birthday).format('YYYY-MM-DD')
+                console.log(obj)                
+
+            })
+        },
         provinceChange(e){
             console.log(e.target.value);
             this.city = city[e.target.value]

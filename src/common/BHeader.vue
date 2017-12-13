@@ -15,10 +15,10 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/profile">
+                    <router-link to="/profile">
                         <i class="fa fa-user"></i>
                         个人中心
-                    </a>
+                    </router-link>
                 </li>
                 <li>
                     <a href="javascript:;" @click='logout'>

@@ -27,13 +27,18 @@
                             </div>
                         </form>
                     </div>
-                    <div key="item.cs_id" v-for="item in list" class="course">
+                    <div key="item.cs_id" v-for="(item,index) in list" class="course">
                         <div class="pic">
                             <img :src="item.cs_cover" alt="">
                         </div>
                         <div class="info">
+                            <router-link
+                             v-bind="{to:'/course/add/step1/'+item.cs_id}">
+                                 {{ item.cs_name }}
+                            </router-link>
                             <ul class="list-unstyled">
                                 <li>
+                                    <span>序列：{{ index }}</span>
                                     <span>讲师：{{ item.tc_name }}</span>
                                     <span>类别：{{ item.cg_name }}</span>
                                 </li>
@@ -78,8 +83,9 @@ export default {
     methods:{
         getData(){
             $.get('/api/course').then((data)=>{
+                console.log(data)
                 console.log(data.result[0])
-                this.list = data.result.splice(0,100)
+                this.list = data.result.splice(data.result.length-101,100)
             })
         }
     }

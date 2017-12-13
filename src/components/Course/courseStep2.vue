@@ -20,22 +20,30 @@
                     <!-- 步聚 -->
                     <ul class="forwards list-unstyled">
                         <li>
-                            <a href="./course_add_step1.html" class="done">
-                            <b class="fa fa-check"></b>
-                            基本信息
-                            </a>
+                            <router-link 
+                             v-bind="{to:'/course/add/step1/'+obj.cs_id}"
+                             class="done">
+                                <b>1</b>
+                                 基本信息
+                            </router-link>
                         </li>
                         <li>
-                            <a href="./course_add_step2.html" class="active">
-                            <b>2</b>
-                            课程图片
-                            </a>
+                            <router-link 
+                             v-bind="{to:'/course/add/step2/'+obj.cs_id}"
+                             class="active"
+                             >
+                                <b>2</b>
+                                课程图片
+                            </router-link>
+                        
                         </li>
                         <li>
-                            <a href="./course_add_step3.html">
+                            <router-link 
+                             v-bind="{to:'/course/add/step3/'+obj.cs_id}"
+                             >
                             <b>3</b>
                             课时管理
-                            </a>
+                            </router-link>
                         </li>
                     </ul>
                     <!-- 课程图片 -->

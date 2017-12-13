@@ -133,7 +133,6 @@ export default {
       this.$validator.validateAll().then(data => {
         if (data) {
             let obj = Object.assign({},this.obj);
-            console.log(moment(obj.tc_join_date).format('YYYY-MM-DD'))
             obj.tc_join_date = moment(this.obj.tc_join_date).format('YYYY-MM-DD')
             console.log(obj.tc_join_date);
             console.log(obj)
