@@ -16,7 +16,7 @@ import CourseAdd from '@/components/Course/courseAdd'
 import CourseStep1 from '@/components/Course/courseStep1'
 import CourseStep2 from '@/components/Course/courseStep2'
 import CourseStep3 from '@/components/Course/courseStep3'
-import CourseList from '@/components/Course/courseList'
+import CourseList from '@/components/Course/CourseList'
 
 // 种类页面相关组件
 import CategoryList from '@/components/Category/categoryList'
