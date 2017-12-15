@@ -56,5 +56,5 @@ export default {
 
 <style scoped>
 .input{border: 1px solid red}
-.is-danger{color: red}
+.is-danger{color: blue}
 </style>
